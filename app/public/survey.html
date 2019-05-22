@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FriendFinder Survey</title>
     <link rel="icon" href="assets/images/friendicon.jpg">
+    <!--jQuery-->
+    <!-- newest jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- bootstrap links-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--bootstrap javaScript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous">
+    </script>
+   
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -13,8 +33,314 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
     
+</head>
+
+<body>
+
+    <!--Top Parallax-->
+    <div class="parallax-container">
+        <div class="parallax"><img src="assets/images/group-of-happy-friends.jpg"></div>
+        <div id="header-title">
+            <h2>Friend Finder</h2>
+        </div>
+    </div>
+
+    <!--Questionaire-->
+    <form class="col s12">
+        <div class="row container">
+            <h5>The start to all great friendships, tell us a little about yourself:</h5>
+            <div class="input-field col s12">
+                <input placeholder="John Doe" id="user-name" type="text" class="validate form-control" required="">
+                <label for="user-name" data-error="Please Enter Your Name" data-success="Name Entered">Your Name</label>
+            </div>
+        </div>
+        <div class="row container">
+            <div class="input-field col s12">
+                <input placeholder="Right-click on image > select 'Copy Image Address' > paste link here." id="user-url"
+                    type="text" class="validate form-control" required="">
+                <label for="user-url" data-error="Please Insert A Link To Your Picture"
+                    data-success="Link Entered">Paste a link to your picture</label>
+            </div>
+        </div>
+    </form>
+    <!-- Survey Questions-->
+
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">1) Do you think George R.R. Martin should have finished writing the Game of
+                Thrones novels prior to releasing the television series?</p>
+            <select class="question" id="q1">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">2) Your ideal holiday is spent outdoors hiking.</p>
+            <select class="question" id="q2">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">3) Dolores Umbridge is the most horrible character in the Harry Potter
+                series.</p>
+            <select class="question" id="q3">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">4) Pineapple belongs on pizza.</p>
+            <select class="question" id="q4">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">5) Dogs are better than cats.</p>
+            <select class="question" id="q5">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">6) My favorite season is autumn.</p>
+            <select class="question" id="q6">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">7) I sometimes make mistakes.</p>
+            <select class="question" id="q7">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">8) My ideal vacation includes: sunny skies, a beach, and a beer.</p>
+            <select class="question" id="q8">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">9) I love brusselsprouts!</p>
+            <select class="question" id="q9">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row container">
+        <div class="input-field col s12">
+            <p class="quest-text left-align">10) You often spend time exploring unrealistic yet intriguing ideas. </p>
+            <select class="question" id="q10">
+                <option value="" disabled selected> Please select an answer...</option>
+                <option value="5" class="questions">Strongly Agree</option>
+                <option value="4" class="questions">Agree</option>
+                <option value="3" class="questions">Neutral</option>
+                <option value="2" class="questions">Disagree</option>
+                <option value="1" class="questions">Strongly Disagree</option>
+            </select>
+        </div>
+    </div>
+    <!-- Search for friends button and links -->
+    <div class="row container center-align">
+        <button class="waves-effect waves-light btn-large" type="submit" name="get-started" id="submit"><i
+                class="material-icons left">local_library</i> Calculate my results!</button>
+    </div>
+
+    <!--Modal displaying new friend-->
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4 class="title center-align"></h4>
+            <p class="name center-align"></p>
+            <div class="img-div center-align">
+                <img class="modal-image" src="" />
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="/app/public/survey.html" class="modal-close waves-effect waves-green btn-flat">Yay friend!</a>
+        </div>
+    </div>
+
+    <!--Script for materialize js components, -->
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('.parallax').parallax();
+        });
+
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+
+        //script to run code and collect quiz data
+        //click handler for the button
+        $('#submit').on("click", function () {
+            // validate user inputs
+            function validateForm() {
+                var isValid = true;
+                $('.form-control').each(function () {
+                    if ($(this).val() === '')
+                        isValid = false;
+                });
+                if ($('#q1').val() === null ||
+                    $("#q2").val() === null ||
+                    $("#q3").val() === null ||
+                    $("#q4").val() === null ||
+                    $("#q5").val() === null ||
+                    $("#q6").val() === null ||
+                    $("#q7").val() === null ||
+                    $("#q8").val() === null ||
+                    $("#q9").val() === null ||
+                    $("#q10").val() === null) {
+                    isValid = false
+                }
+                return isValid;
+            }
+            //if === true run next
+            if (validateForm() == true) {
+                //create the userData object and store all entered Svalues
+                var userData = {
+                    name: $('#user-name').val().trim(),
+                    photo: $('#user-url').val().trim(),
+                    scores: [$('#q1').val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+                }
+                //save user score in an array 
+                var userScore = userData.scores;
+                // make an array that will be used to store the difference between userScore array and the objects in the array in friend.js
+                var findDifferenceArr = [];
+                //store the current URL into a variable
+                var currentURL = window.location.origin;
+                //make an AJAX call to get the friendsData stored in friends.js
+                $.ajax({ url: currentURL + "/api/friends.js", method: "GET" })
+                    .done(function (friendsData) {
+                        //loops through each object in the array in friends.js
+                        for (var i = 0; i < friendsData.length; i++) {
+                            var currentDifferencesArray = [];
+                            var indexTally = 0;
+                            //then go into each object's scores comparing each score to the user scores
+                            for (var i = 0; i < 10; i++) {
+                                //convert the string numbers into integers
+                                var compareIndex = parseInt(friendsData[i].scores[i]);
+                                var userIndex = parseInt(newUserScoreArr[i]);
+                                //find the absolute difference betweeen the user's score for the current question and the current objects score
+                                var indexDiff = Math.abs(compareIndex - userIndex);
+                                //push that difference to an array
+                                currDiffArr.push(indexDiff);
+                            }
+                            //add up all the indexDiffs
+                            for (var i = 0; i < currDiffArr.length; i++) {
+                                indexTally += currDiffArr[i];
+                            }
+                            //store the total difference between the user's score and the current object's score 
+                            friendDiffArr.push(indexTally);
+                        }
+                        //get the index of the lowest score in the friendDiffArr.  Lowest score has most in common = friends.
+                        var friendIndex = friendDiffArr.indexOf(Math.min(...friendDiffArr));
+                        //store the new friends name in a variable
+                        var newFriendName = friendsData[friendIndex].name;
+                        //store the new friends image link in a variable
+                        var newFriendPhoto = friendsData[friendIndex].photo;
+                        //populate the modal
+                        $('.modal-title').html("Your New Friend Awaits...")
+                        $('.modal-name').text(newFriendName);
+                        $('.modal-image').attr("src", newFriendPhoto);
+                        $('.modal-button').attr("href", "/survey");
+                        //show the modal
+                        $('#modal1').modal('open');
+                        //call the function that posts the users data
+                        postData();
+                    })
+                //function posts the user's data to friends.js 
+                function postData() {
+                    $.post(currentURL + "/api/friends", userData);
+                }
+                //clear the questionairre fields
+                var select = $('select');
+                $("form input").val("");
+                select.prop('selectedIndex', 0);
+                select.material_select();
+                $('#user-name').val("");
+            } else {
+                //if the user didn't enter all the data, pop a modal informing them they have to enter all request information
+                $('.modal-title').text("WAIT!?!");
+                $('.modal-name').html("Please answer all questions to ensure your match");
+                $('.modal-button').attr("href", "#!");
+                $('#modal1').modal('open');
+            }
+        })
+
+
+
+    </script>
+
 </body>
+
 </html>

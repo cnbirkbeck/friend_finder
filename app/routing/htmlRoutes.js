@@ -4,11 +4,9 @@ var path = require("path");
 var express = require("express");
 
 // Routes
-// =============================================================
-
 //htmlRoutes.js exports this route to the server
 module.exports = function(app) {
-    //if express can't find any static files, it will look for them in app/public
+    //look for static files in app/public
     app.use(express.static("app/public"));
     //the route for the home page
     app.get("/", function(req, res) {
