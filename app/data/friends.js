@@ -33,21 +33,7 @@ var friendsArray = [
         ]
     },
     {
-        "name": "Denis Molloy",
-        "photo": "https://avatars2.githubusercontent.com/u/27693954?v=4&s=460",
-        "scores": [
-        "4",
-        "1",
-        "1",
-        "3",
-        "1",
-        "1",
-        "2",
-        "5",
-        "1",
-        "5"
-        ]
-    }
+        
 ];
 //this file exports the firends array to apiRoutes.html for use in survey.html
 module.exports = friendsArray;
