@@ -26,7 +26,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
@@ -41,7 +41,7 @@
     </div>
     <!-- Intro to Friend Finder-->
     <div class="row container">
-        <div class="col s12">
+        <div class="col s10">
             <h3 class="header">Trouble finding friends?</h3>
             <p class="friend_intro">Tired of being "Billy No Mates"? Ready to find someone who embraces your mutual
                 weirdness in the celebratory endeavor known as friendship? Well hunt no more, simply answer a few easy
@@ -53,55 +53,40 @@
 
     </div>
 
-    <!--Cards of friend photos/ incentives-->    
-    <div class="row">
-            <div class="col s4 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="assets/images/friend.jpg">
-                  <span class="card-title">BFFS?</span>
-                </div>
-                <div class="card-content">
-                  <p>Don't worry we've got you covered!</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!--Carousel of friend photos/ incentives-->
 
-    <div class="row">
-            <div class="col s4 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="assets/images/three-female-friends.jpg">
-                  <span class="card-title">Gal Pals?</span>
-                </div>
-                <div class="card-content">
-                  <p>We'll connect you to some top chicks!</p>
-                </div>
-            </div>
+    <div class="carousel carousel-slider">
+        <a class="carousel-item" href="#one!"><img src="assets/images/friend.jpg"></a>
+        <a class="carousel-item" href="#two!"><img src="assets/images/three-female-friends.jpg"> </a>
+        <a class="carousel-item" href="#three!"><img src="assets/images/guy friends.jpg"></a>
+        <a class="carousel-item" href="#four!"><img src="assets/images/tumblr-photography-legs-mountains-Favim.com-4275343.jpeg"></a>
+    </div>
+    <!--Container for add and button to start quiz-->
+    <div class="row container">
+        <div class="col s10" id = "interest_text">
+            <p>Whether your looking for a new BFF, some Gal Pals, or a Bromance we've got you covered! Just click the button
+            below and answer a few simple questions. Then we will match you based on compatibility. You're one click
+            away from finding your new bosom buddies!</p>
         </div>
     </div>
-    <div class="row">
-            <div class="col s4 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="assets/images/guy friends.jpg">
-                  <span class="card-title">Best Bros?</span>
-                </div>
-                <div class="card-content">
-                  <p>With our help your destined to find some cool dudes!</p>
-                </div>
-            </div>
+    <div class = "row container">
+        <div class = "col s10" id="btn">
+            <a  href="/app/public/survey.html"><button class="waves-effect waves-light btn-large"><i class="material-icons left">face</i></i>Start Survey</button></a>
         </div>
     </div>
-
     <!--Script for materialize js components-->
     <script type="text/javascript">
         $(document).ready(function () {
             $('.parallax').parallax();
         });
-        
-       
+
+        $('.carousel.carousel-slider').carousel({
+            fullWidth: true,
+            indicators: true,
+            duration: 100,
+
+        });
+
 
 
 
