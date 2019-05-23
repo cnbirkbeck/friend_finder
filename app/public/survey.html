@@ -46,7 +46,7 @@
             <div class="input-field col s12">
                 <input placeholder="Right-click on image. Select 'Copy Image Address' . Paste the link here." id="user-url"
                     type="text" class="validate form-control" required="">
-                <label for="user-url" data-error="Please Insert A Link To Your Picture"
+                <label for="user-photo" data-error="Please Insert A Link To Your Picture"
                     data-success="Link Entered">Paste a link to your picture</label>
             </div>
         </div>
@@ -227,16 +227,17 @@
         });
 
         //script to run code and collect quiz data
-        //click handler for the button
-        $('#submit').on("click", function () {
-            // validate user inputs
+       
+        // click event for button
+        $("#submit").on("click", function(){
+            // validate user input
             function validateForm() {
                 var isValid = true;
-                $('.form-control').each(function () {
-                    if ($(this).val() === '')
-                        isValid = false;
+                $(".form-control").each(function(){
+                    if($(this).val() === "")
+                    isValid = false;
                 });
-                if ($('#q1').val() === null ||
+                if ($("#q1").val() === null ||
                     $("#q2").val() === null ||
                     $("#q3").val() === null ||
                     $("#q4").val() === null ||
@@ -247,81 +248,90 @@
                     $("#q9").val() === null ||
                     $("#q10").val() === null) {
                     isValid = false
-                }
+                } 
                 return isValid;
             }
-            //if === true run next
+            // if isValid === true run next portion
             if (validateForm() == true) {
-                //create the userData object and store all entered values
+                // create a variable to store user data object
                 var userData = {
-                    name: $('#user-name').val().trim(),
-                    photo: $('#user-url').val().trim(),
-                    scores: [$('#q1').val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
+                    name: $("#user-name").val().trim(),
+                    photo: $("#user-photo").val(),
+                    scores: [$("#q1").val(), $("#q2").val(),
+                    $("#q3").val(), $("#q4").val(),
+                    $("#q5").val(), $("#q6").val(), 
+                    $("#q6").val(), $("#q7").val(),
+                    $("#q8").val(), $("#q9").val(), 
+                    $("#q10").val() ]
                 };
+                //console.log to test
                 console.log(userData);
-                //save user score in an array 
+                //save user score in an array
                 var userScore = userData.scores;
-                // make an array that will be used to store the difference between userScore array and the objects already in the array in friend.js
-                var findDifferenceArr = [];
-                //store the current URL into a variable
+                //make array to store difference between the user's score array and the objects already in friends array in friends.js
+                var findDifferenceArr= [];
+                // store the current URL to a var
                 var currentURL = window.location.origin;
-                //make an AJAX call to get the friendsData stored in friends.js
-                $.ajax({ url: currentURL + "/api/friends", method: "GET"})
-                    .done(function (friendsData) {
-                        //loops through each object in the array in friends.js
-                        for (var i = 0; i < friendsData.length; i++) {
-                            var currentDifferencesArray = [];
-                            var indexTally = 0;
-                            //then go into each object's scores comparing each score to the user scores
-                            for (var i = 0; i < 10; i++) {
-                                //convert the string numbers into integers
-                                console.log(friendsData);
-                                var compareIndex = parseInt(friendsData[i]);
-                                var userIndex = parseInt(userScore[i]);
-                                //find the absolute difference betweeen the user's score for the current question and the current objects score
-                                var indexDiff = Math.abs(compareIndex - userIndex);
-                                //push that difference to an array
-                                currentDifferencesArray.push(indexDiff);
-                            }
-                            //add up all the index differences
-                            for (var i = 0; i < currentDifferencesArray.length; i++) {
-                                indexTally += currentDifferencesArray[i];
-                            }
-                            //store the total difference between the user's score and the current object's score 
-                            findDifferenceArr.push(indexTally);
-                        }
-                        //get the index of the lowest score in the findDifferenceArr.  Lowest score has most in common = friends.
-                        var friendIndex = findDifferenceArr.indexOf(Math.min(...findDifferenceArr));
-                        //store the new friend in a variable
-                        var newFriend = friendsData[friendIndex];
-                        // CODE BREAKS HERE-- data in array is returning as undefined. So it is stopping the modal from populating.
-                        //populate the modal
-                        $('.modal-title').html("Your New Friend Awaits...")
-                        $('.modal-name').text(newFriend);
-                        $('.modal-image').attr("src", newFriend.photo);
-                        $('.modal-button').attr("href", "/survey");
-                        //show the modal
-                        $('#modal1').modal('open');
-                        //call the function that posts the users data
-                        postData();
-                    })
-                //function posts the user's data to friends.js 
+                //AJAX call to get the data from friends.js object
+                $.ajax({url: currentURL + "/api/friends", method: "GET"}) .done(function(friendsData){
+                    //loop through each object in array in friends.js
+                    for (var i = 0; i < friendsData.length; i++){
+                        //parse the string to numbers
+                        var compareIndex = parseInt(friendsData[i]);
+                        var userIndex = parseInt(userScore[i]);
+                        //calculate difference between user's score for each question and the current object's score
+                        var indexDifference = Math.abs(compareIndex-userIndex);
+                        //push the difference to an array
+                        findDifferenceArr.push(indexDifference);
+
+                    }
+                    // loop through and add all index differences
+                    for (var i = 0; i < findDifferenceArr.length; i++){
+                        indexCollate = findDifferenceArr[i];
+                
+                    }
+                    //store total difference between the user's score and the current object's score (indexColate);
+                
+                    // get the index of the lowest score in the findDifferenceArr. The lowest score has the most in common and is the new friend.
+                    var friendIndex = findDifferenceArr.indexOf(Math.min(...findDifferenceArr));
+                    // store new friend in var
+                    var newFriend = friendsData[friendIndex];
+                    // populate modal with friends information
+                    $(".modal-title").html("Your New Friend Awaits...");
+                    $(".modal-name").text(newFriend.name);
+                    $(".modal-image").attr("src", newFriend.photo);
+                    $(".modal-button").attr("href", "/survey");
+
+                    //display the modal
+                    var elem = document.querySelectorAll('.modal');
+                    var instance = M.Modal.getInstance(elem);
+                    instance.open();
+                    // call function to post user's data to friends.js array
+                    postData();
+                })
+
                 function postData() {
                     $.post(currentURL + "/api/friends", userData);
+
                 }
-                //clear the questionairre fields
-                var select = $('select');
+                //clear questionnaire 
+                var select = $("select");
                 $("form input").val("");
-                select.prop('selectedIndex', 0);
+                select.prop("selectedIndex", 0);
                 select.formSelect();
-                $('#user-name').val("");
+                $("#user-name").val("");
             } else {
-                //if the user didn't enter all the data, pop a modal informing them they have to enter all request information
-                $('.modal-title').text("WAIT!?!");
-                $('.modal-name').html("Please answer all questions to ensure your match");
-                $('.modal-button').attr("href", "#!");
-                $('#modal1').modal('open');
-            }
+                document.addEventListener('DOMContentLoaded', function(){ 
+                    var elem = document.querySelectorAll('.modal');
+                    var instance = M.Modal.getInstance(elem);
+                
+                    // prevent user from not entering data, bring up a modal to inform them they didn't supply all required information
+                    $(".modal-title").text("WAIT?!?!");
+                    $(".modal-name").html("Please answer all questions to ensure we can find you a match!");
+                    $(".modal-button").attr("href", "#!");
+                    instance.open();
+                });   
+            };  
         })
 
 
