@@ -4,7 +4,8 @@
   "description": "friend finder application that uses a survey to connect friends",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "server.js"
   },
   "author": "Cassandra Birkbeck",
   "license": "ISC"
