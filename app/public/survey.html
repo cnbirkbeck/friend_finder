@@ -8,29 +8,16 @@
     <title>FriendFinder Survey</title>
     <link rel="icon" href="assets/images/friendicon.jpg">
     <!--jQuery-->
-    <!-- newest jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- bootstrap links-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!--bootstrap javaScript-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous">
-    </script>
-   
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></script>  
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     
@@ -57,7 +44,7 @@
         </div>
         <div class="row container">
             <div class="input-field col s12">
-                <input placeholder="Right-click on image > select 'Copy Image Address' > paste link here." id="user-url"
+                <input placeholder="Right-click on image. Select 'Copy Image Address' . Paste the link here." id="user-url"
                     type="text" class="validate form-control" required="">
                 <label for="user-url" data-error="Please Insert A Link To Your Picture"
                     data-success="Link Entered">Paste a link to your picture</label>
@@ -210,8 +197,7 @@
     </div>
     <!-- Search for friends button and links -->
     <div class="row container center-align">
-        <button class="waves-effect waves-light btn-large" type="submit" name="get-started" id="submit"><i
-                class="material-icons left">local_library</i> Calculate my results!</button>
+        <button class="waves-effect waves-light btn-large" type="submit" name="get-started" id="submit"><i class="material-icons left">local_library</i> Calculate my results!</button>
     </div>
 
     <!--Modal displaying new friend-->
@@ -266,20 +252,21 @@
             }
             //if === true run next
             if (validateForm() == true) {
-                //create the userData object and store all entered Svalues
+                //create the userData object and store all entered values
                 var userData = {
                     name: $('#user-name').val().trim(),
                     photo: $('#user-url').val().trim(),
                     scores: [$('#q1').val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
-                }
+                };
+                console.log(userData);
                 //save user score in an array 
                 var userScore = userData.scores;
-                // make an array that will be used to store the difference between userScore array and the objects in the array in friend.js
+                // make an array that will be used to store the difference between userScore array and the objects already in the array in friend.js
                 var findDifferenceArr = [];
                 //store the current URL into a variable
                 var currentURL = window.location.origin;
                 //make an AJAX call to get the friendsData stored in friends.js
-                $.ajax({ url: currentURL + "/api/friends.js", method: "GET" })
+                $.ajax({ url: currentURL + "/api/friends", method: "GET"})
                     .done(function (friendsData) {
                         //loops through each object in the array in friends.js
                         for (var i = 0; i < friendsData.length; i++) {
@@ -288,30 +275,30 @@
                             //then go into each object's scores comparing each score to the user scores
                             for (var i = 0; i < 10; i++) {
                                 //convert the string numbers into integers
-                                var compareIndex = parseInt(friendsData[i].scores[i]);
-                                var userIndex = parseInt(newUserScoreArr[i]);
+                                console.log(friendsData);
+                                var compareIndex = parseInt(friendsData[i]);
+                                var userIndex = parseInt(userScore[i]);
                                 //find the absolute difference betweeen the user's score for the current question and the current objects score
                                 var indexDiff = Math.abs(compareIndex - userIndex);
                                 //push that difference to an array
-                                currDiffArr.push(indexDiff);
+                                currentDifferencesArray.push(indexDiff);
                             }
-                            //add up all the indexDiffs
-                            for (var i = 0; i < currDiffArr.length; i++) {
-                                indexTally += currDiffArr[i];
+                            //add up all the index differences
+                            for (var i = 0; i < currentDifferencesArray.length; i++) {
+                                indexTally += currentDifferencesArray[i];
                             }
                             //store the total difference between the user's score and the current object's score 
-                            friendDiffArr.push(indexTally);
+                            findDifferenceArr.push(indexTally);
                         }
-                        //get the index of the lowest score in the friendDiffArr.  Lowest score has most in common = friends.
-                        var friendIndex = friendDiffArr.indexOf(Math.min(...friendDiffArr));
-                        //store the new friends name in a variable
-                        var newFriendName = friendsData[friendIndex].name;
-                        //store the new friends image link in a variable
-                        var newFriendPhoto = friendsData[friendIndex].photo;
+                        //get the index of the lowest score in the findDifferenceArr.  Lowest score has most in common = friends.
+                        var friendIndex = findDifferenceArr.indexOf(Math.min(...findDifferenceArr));
+                        //store the new friend in a variable
+                        var newFriend = friendsData[friendIndex];
+                        
                         //populate the modal
                         $('.modal-title').html("Your New Friend Awaits...")
-                        $('.modal-name').text(newFriendName);
-                        $('.modal-image').attr("src", newFriendPhoto);
+                        $('.modal-name').text(newFriend);
+                        $('.modal-image').attr("src", newFriend.photo);
                         $('.modal-button').attr("href", "/survey");
                         //show the modal
                         $('#modal1').modal('open');
@@ -326,7 +313,7 @@
                 var select = $('select');
                 $("form input").val("");
                 select.prop('selectedIndex', 0);
-                select.material_select();
+                select.formSelect();
                 $('#user-name').val("");
             } else {
                 //if the user didn't enter all the data, pop a modal informing them they have to enter all request information

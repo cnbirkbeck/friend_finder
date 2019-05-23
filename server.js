@@ -25,8 +25,8 @@ app.use('/static', express.static(path.join(__dirname, 'app/public')))
 // The below points our server to a series of "route" files.
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 
-require("./app/routing/api-routes.js")(app);
-require("./app/routing/html-routes.js")(app);
+require("./app/routing/apiRoutes.js")(app);
+require("./app/routing/htmlRoutes.js")(app);
 
 // LISTENER
 // The below code effectively "starts" our server
