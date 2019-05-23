@@ -294,7 +294,7 @@
                         var friendIndex = findDifferenceArr.indexOf(Math.min(...findDifferenceArr));
                         //store the new friend in a variable
                         var newFriend = friendsData[friendIndex];
-                        
+                        // CODE BREAKS HERE-- data in array is returning as undefined. So it is stopping the modal from populating.
                         //populate the modal
                         $('.modal-title').html("Your New Friend Awaits...")
                         $('.modal-name').text(newFriend);
