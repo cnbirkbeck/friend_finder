@@ -287,7 +287,7 @@
                     }
                     // loop through and add all index differences
                     for (var i = 0; i < findDifferenceArr.length; i++){
-                        indexCollate = findDifferenceArr[i];
+                        indexCollate += findDifferenceArr[i];
                 
                     }
                     //store total difference between the user's score and the current object's score (indexColate);
@@ -321,16 +321,16 @@
                 select.formSelect();
                 $("#user-name").val("");
             } else {
-                document.addEventListener('DOMContentLoaded', function(){ 
-                    var elem = document.querySelectorAll('.modal');
-                    var instance = M.Modal.getInstance(elem);
                 
-                    // prevent user from not entering data, bring up a modal to inform them they didn't supply all required information
-                    $(".modal-title").text("WAIT?!?!");
-                    $(".modal-name").html("Please answer all questions to ensure we can find you a match!");
-                    $(".modal-button").attr("href", "#!");
-                    instance.open();
-                });   
+                
+                // prevent user from not entering data, bring up a modal to inform them they didn't supply all required information
+                $(".modal-title").text("WAIT?!?!");
+                $(".modal-name").html("Please answer all questions to ensure we can find you a match!");
+                $(".modal-button").attr("href", "#!");
+                var elem = document.querySelectorAll('.modal');
+                var instance = M.Modal.getInstance(elem);
+                instance.open();
+                  
             };  
         })
 
