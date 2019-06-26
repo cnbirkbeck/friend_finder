@@ -14,10 +14,10 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
+
 </head>
 
 <body>
@@ -41,8 +41,8 @@
         </div>
         <div class="row container">
             <div class="input-field col s12">
-                <input placeholder="Right-click on image. Select 'Copy Image Address' . Paste the link here." id="user-url"
-                    type="text" class="validate form-control" required="">
+                <input placeholder="Right-click on image. Select 'Copy Image Address' . Paste the link here."
+                    id="user-url" type="text" class="validate form-control" required="">
                 <label for="user-photo" data-error="Please Insert A Link To Your Picture"
                     data-success="Link Entered">Paste a link to your picture</label>
             </div>
@@ -194,21 +194,22 @@
     </div>
     <!-- Search for friends button and links -->
     <div class="row container center-align">
-        <button class="waves-effect waves-light btn-large" type="submit" name="get-started" id="submit"><i class="material-icons left">local_library</i> Calculate my results!</button>
+        <button class="waves-effect waves-light btn-large" type="submit" name="get-started" id="submit"><i
+                class="material-icons left">local_library</i> Calculate my results!</button>
     </div>
 
     <!--Modal displaying new friend-->
     <!-- Modal Structure -->
-    <div id="modal1" class="modal">
+    <div id="modalFriend" class="modal">
         <div class="modal-content">
-            <h4 class="title center-align"></h4>
-            <p class="name center-align"></p>
+            <h4 class="modal-title center-align"></h4>
+            <p class="modal-name center-align"></p>
             <div class="img-div center-align">
                 <img class="modal-image" src="" />
             </div>
         </div>
         <div class="modal-footer">
-            <a href="/app/public/survey.html" class="modal-close waves-effect waves-green btn-flat">Yay friend!</a>
+            <a href="#remodal" class="modal-close waves-effect waves-light btn">Yay friend!</a>
         </div>
     </div>
 
@@ -217,22 +218,20 @@
 
         $(document).ready(function () {
             $('.parallax').parallax();
-        });
-
-        $(document).ready(function () {
             $('select').formSelect();
+            $('.modal').modal();
         });
 
         //script to run code and collect quiz data
-       
+
         // click event for button
-        $("#submit").on("click", function(){
+        $("#submit").on("click", function () {
             // validate user input
             function validateForm() {
                 var isValid = true;
-                $(".form-control").each(function(){
-                    if($(this).val() === "")
-                    isValid = false;
+                $(".form-control").each(function () {
+                    if ($(this).val() === "")
+                        isValid = false;
                 });
                 if ($("#q1").val() === null ||
                     $("#q2").val() === null ||
@@ -245,7 +244,7 @@
                     $("#q9").val() === null ||
                     $("#q10").val() === null) {
                     isValid = false
-                } 
+                }
                 return isValid;
             }
             // if isValid === true run next portion
@@ -253,42 +252,50 @@
                 // create a variable to store user data object
                 var userData = {
                     name: $("#user-name").val().trim(),
-                    photo: $("#user-photo").val(),
+                    photo: $("#user-url").val(),
                     scores: [$("#q1").val(), $("#q2").val(),
                     $("#q3").val(), $("#q4").val(),
-                    $("#q5").val(), $("#q6").val(), 
+                    $("#q5").val(), $("#q6").val(),
                     $("#q6").val(), $("#q7").val(),
-                    $("#q8").val(), $("#q9").val(), 
-                    $("#q10").val() ]
+                    $("#q8").val(), $("#q9").val(),
+                    $("#q10").val()]
                 };
                 //console.log to test
                 console.log(userData);
                 //save user score in an array
                 var userScore = userData.scores;
                 //make array to store difference between the user's score array and the objects already in friends array in friends.js
-                var findDifferenceArr= [];
+                var findDifferenceArr = [];
                 // store the current URL to a var
                 var currentURL = window.location.origin;
                 //AJAX call to get the data from friends.js object
-                $.ajax({url: currentURL + "/api/friends", method: "GET"}) .done(function(friendsData){
+                $.ajax({ url: currentURL + "/api/friends", method: "GET" }).done(function (friendsData) {
                     //loop through each object in array in friends.js
-                    for (var i = 0; i < friendsData.length; i++){
-                        //parse the string to numbers
-                        var compareIndex = parseInt(friendsData[i]);
-                        var userIndex = parseInt(userScore[i]);
-                        //calculate difference between user's score for each question and the current object's score
-                        var indexDifference = Math.abs(compareIndex-userIndex);
-                        //push the difference to an array
-                        findDifferenceArr.push(indexDifference);
+                    for (var i = 0; i < friendsData.length; i++) {
+                        var findDifferenceArr = [];
+                        var indexColate = 0;
+                        // compare each score to the user's scores in each objects scores property
+                        for (var j = 0; j < 10; j++) {
+                            //parse the string numbers to integers
+                            var compareIndex = parseInt(friendsData[i].scores[j]);
+                            var userIndex = parseInt(userScore[j]);
+                            //calculate difference between user's score for each question and the current object's score
+                            var indexDifference = Math.abs(compareIndex - userIndex);
+                            //push the difference to an array
+                            findDifferenceArr.push(indexDifference);
+                        }
+                        // loop through and add all index differences
+                        for (var k = 0; k < findDifferenceArr.length; k++) {
+                            indexColate += findDifferenceArr[k];
+
+                        }
+
+                        //store total difference between the user's score and the current object's score (indexColate);
+                        findDifferenceArr.push(indexColate);
 
                     }
-                    // loop through and add all index differences
-                    for (var i = 0; i < findDifferenceArr.length; i++){
-                        indexDifference += findDifferenceArr[i];
-                
-                    }
-                    //store total difference between the user's score and the current object's score (indexColate);
-                
+
+                    
                     // get the index of the lowest score in the findDifferenceArr. The lowest score has the most in common and is the new friend.
                     var friendIndex = findDifferenceArr.indexOf(Math.min(...findDifferenceArr));
                     // store new friend in var
@@ -300,13 +307,11 @@
                     $(".modal-button").attr("href", "/survey");
 
                     //display the modal
-                    var elem = document.querySelectorAll('.modal');
-                    var instance = M.Modal.getInstance(elem);
-                    instance.open();
+                    $("#modalFriend").modal("open");
                     // call function to post user's data to friends.js array
                     postData();
                 })
-
+                // post new user's data to friends.js array so they appear in app
                 function postData() {
                     $.post(currentURL + "/api/friends", userData);
 
@@ -318,17 +323,17 @@
                 select.formSelect();
                 $("#user-name").val("");
             } else {
-                
-                
+
+
                 // prevent user from not entering data, bring up a modal to inform them they didn't supply all required information
                 $(".modal-title").text("WAIT?!?!");
                 $(".modal-name").html("Please answer all questions to ensure we can find you a match!");
                 $(".modal-button").attr("href", "#!");
-                var elem = document.querySelectorAll('.modal');
-                var instance = M.Modal.getInstance(elem);
-                instance.open();
-                  
-            };  
+                $("#modalFriend").modal("open");
+
+            
+
+            };
         })
 
 
