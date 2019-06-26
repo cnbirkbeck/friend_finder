@@ -1,0 +1,25 @@
+{
+  "name": "friend_finder",
+  "version": "1.0.0",
+  "description": "Friend Finder is a fullstack site which requires the user to answer 10 questions. Afterwards, it takes the answers and compares them against other user's answers saved on the server to figure out who they are most compatible with.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cnbirkbeck/friend_finder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cnbirkbeck/friend_finder/issues"
+  },
+  "homepage": "https://github.com/cnbirkbeck/friend_finder#readme"
+}
