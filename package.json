@@ -4,8 +4,8 @@
   "description": "Friend Finder is a fullstack site which requires the user to answer 10 questions. Afterwards, it takes the answers and compares them against other user's answers saved on the server to figure out who they are most compatible with.",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2"
   },
   "devDependencies": {},
   "scripts": {
